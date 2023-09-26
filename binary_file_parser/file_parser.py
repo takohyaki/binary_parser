@@ -5,13 +5,13 @@ def read_file(file_path):
     byte_lengths = {'recnum': 4, 'latitude': 4, 'longitude': 4, 'numvals': 2, 'SS': 4, 'S1': 4}
     unpack_formats = {'recnum': 'i', 'latitude': 'f', 'longitude': 'f', 'numvals': 'h', 'SS': 'f', 'S1': 'f'}
 
-    recnums = []
-    latitudes = []
-    longitudes = [] 
-    numvals_list = []
-    SS_vals = [] 
-    S1_vals = []
-    with open(file_path, "rb") as file:
+    r = []
+    lat = []
+    long = [] 
+    nv = []
+    SS_list = [] 
+    S1_list = []
+    with open(file_path, 'rb') as file:
         while True:
             try:
                 recnum = struct.unpack(unpack_formats['recnum'], file.read(byte_lengths['recnum']))[0]
@@ -22,13 +22,14 @@ def read_file(file_path):
                 S1 = struct.unpack(unpack_formats['S1'], file.read(byte_lengths['S1']))[0]
             except:
                 break
-            recnums.append(recnum)
-            latitudes.append(latitude)
-            longitudes.append(longitude)
-            numvals_list.append(numvals)
-            SS_vals.append(SS)
-            S1_vals.append(S1)
+            r.append(recnum)
+            lat.append(latitude)
+            long.append(longitude)
+            nv.append(numvals)
+            SS_list.append(SS)
+            S1_list.append(S1)
             file.seek(2, 1)  # skip 2 bytes
 
-    df = pd.DataFrame({'recnum': recnums, 'latitude': latitudes, 'longitude': longitudes, 'numvals': numvals_list, 'SS': SS_vals, 'S1': S1_vals})
+    df = pd.DataFrame({'recnum': r, 'latitude': lat, 'longitude': long, 'numvals': nv, 'SS': SS_list, 'S1': S1_list})
+    df['longitude'] += 10 # adjust the longitude values by adding 10 to each value
     return df

@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: binary-file-parser
+Version: 0.1
+Summary: A package to parse and visualize the earthquake data for Linda.
+Author: Tammie Koh
+Requires-Dist: pandas
+Requires-Dist: matplotlib
