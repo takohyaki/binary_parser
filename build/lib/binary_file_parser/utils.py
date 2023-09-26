@@ -1,16 +1,16 @@
 import matplotlib.pyplot as plt
 
-def plot_scatterplot(dataframe, x_column, y_column, color_column=None, title='', xlabel='', ylabel=''):
-    if color_column:
-        plt.scatter(dataframe[x_column], dataframe[y_column], c=dataframe[color_column], cmap='plasma', s=1)
-        plt.colorbar(label=color_column)
-    else:
-        plt.scatter(dataframe[x_column], dataframe[y_column], s=1)
-    
+# For a scatterplot
+def plot_scatterplot(dataframe, x_column, y_column, title='', xlabel='', ylabel='', save_path=None):
+    plt.scatter(dataframe[x_column], dataframe[y_column], s=1)
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    plt.show()
+    
+    if save_path:
+        plt.savefig(save_path)
+    else:
+        plt.show()
 
 # For a histogram
 

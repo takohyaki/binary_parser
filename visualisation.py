@@ -8,7 +8,8 @@ df = read_file(data_path)
 print(df)
 
 # For scatterplot
-plot_scatterplot(df, 'longitude', 'latitude', title='Geographical Distribution Seismic Data Point Locations', xlabel='Longitude', ylabel='Latitude')
+plot_scatterplot(df, 'longitude', 'latitude', color_column='SS', title='Geospatial Distribution (Coloured by SS values)', xlabel='Longitude', ylabel='Latitude')
+plot_scatterplot(df, 'longitude', 'latitude', color_column='S1', title='Geospatial Distribution (Coloured by S1 values)', xlabel='Longitude', ylabel='Latitude')
 
 # For histogram
 plot_histogram(df, 'SS', title='Histogram of SS Values', xlabel='SS Value', bins=30)
