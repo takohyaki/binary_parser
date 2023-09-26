@@ -1,11 +1,16 @@
 import struct
 import pandas as pd
 
-def parse_binary_file(file_path):
+def read_file(file_path):
     byte_lengths = {'recnum': 4, 'latitude': 4, 'longitude': 4, 'numvals': 2, 'SS': 4, 'S1': 4}
     unpack_formats = {'recnum': 'i', 'latitude': 'f', 'longitude': 'f', 'numvals': 'h', 'SS': 'f', 'S1': 'f'}
 
-    recnums, latitudes, longitudes, numvals_list, SS_vals, S1_vals = [], [], [], [], [], []
+    recnums = []
+    latitudes = []
+    longitudes = [] 
+    numvals_list = []
+    SS_vals = [] 
+    S1_vals = []
     with open(file_path, "rb") as file:
         while True:
             try:
