@@ -77,8 +77,6 @@ plot_histogram(df, 'SS', title='Histogram of SS Values', xlabel='SS Value', bins
    python visualisation.py
    ```
 
-## Assignment Prompt
->>>>>>> 68a96c4f905277e086613c7d9c7776db5e03e637
 
 ## In this README :point_down:
 
@@ -111,7 +109,6 @@ binary_file_parser/
 ├── setup.py                # Setup script for the package
 └── visualisation.py        # Main script to run
 ```
-
 
 ## Usage
 
