@@ -1,6 +1,16 @@
 import struct
 import pandas as pd
 
+def wrap_lat(latitude):
+    if -90 <= latitude <= 90:
+        return latitude
+    return (abs(latitude) % 180) - 90 if latitude < 0 else 90 - (abs(latitude) % 180)
+
+def wrap_long(longitude):
+    if -180 <= longitude < 180:
+        return longitude
+    return (longitude + 180) % 360 - 180
+
 def read_file(file_path):
     byte_lengths = {'recnum': 4, 'latitude': 4, 'longitude': 4, 'numvals': 2, 'SS': 4, 'S1': 4}
     unpack_formats = {'recnum': 'i', 'latitude': 'f', 'longitude': 'f', 'numvals': 'h', 'SS': 'f', 'S1': 'f'}
@@ -30,6 +40,8 @@ def read_file(file_path):
             S1_list.append(S1)
             file.seek(2, 1)  # skip 2 bytes
 
+    lat = [wrap_lat(latitude) for latitude in lat]
+    long = [wrap_long(longitude) for longitude in long]
+
     df = pd.DataFrame({'recnum': r, 'latitude': lat, 'longitude': long, 'numvals': nv, 'SS': SS_list, 'S1': S1_list})
-    df['longitude'] += 10 # adjust the longitude values by adding 10 to each value
     return df
